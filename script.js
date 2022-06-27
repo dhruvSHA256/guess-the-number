@@ -10,13 +10,6 @@ const setMessage = function (msg) {
     document.querySelector(".message").textContent = msg;
 }
 
-const updateHighscore = function (score, highscore) {
-    if (score > highscore) {
-        highscore = score;
-        document.querySelector('.highscore').textContent = highscore;
-    }
-}
-
 const eventCheck = function () {
     const number = Number(document.querySelector(".guess").value);
     if (!number) {
@@ -27,7 +20,8 @@ const eventCheck = function () {
         document.querySelector('.number').textContent = correctNumber;
         document.querySelector('body').style.backgroundColor = '#60b347';
         document.querySelector('.number').style.width = '30rem';
-        updateHighscore(score, highscore);
+        highscore = Math.max(score, highscore);
+        document.querySelector('.highscore').textContent = highscore;
     }
     else {
 
@@ -58,5 +52,6 @@ let correctNumber = getRandomInt(1, 20);
 let score = 20;
 let highscore = 0;
 
+console.log(correctNumber);
 document.querySelector(".check").addEventListener('click', eventCheck);
 document.querySelector('.again').addEventListener('click', eventAgain);
